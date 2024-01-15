@@ -12,8 +12,8 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
     <ProjectReference Include="..\Sudoku.Backtracking\Sudoku.Backtracking.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
+    <ProjectReference Include="..\Sudoku.GrapheTheory\Sudoku.GrapheTheory.csproj" />
   </ItemGroup>
 </Project>
