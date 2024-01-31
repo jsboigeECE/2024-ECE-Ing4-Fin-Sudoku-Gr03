@@ -1,5 +1,10 @@
 Bienvenue sur le dépôt du TP Sudoku.....
 
+## Enregistrements vidéos de mise en place
+
+[Enregistrement 1](https://poce-my.sharepoint.com/:v:/g/personal/jsboige_omnesintervenant_com/EaMwxn53nJZJkNwFNh-k7-EBV3mT9m3y27tWwv4-56s3Ew?referrer=Teams.TEAMS-ELECTRON&referrerScenario=MeetingChicletGetLink.view.view)
+
+
 ## Présentation des solvers
 
 Listez ici la documentation qui accompagne vos solvers.
