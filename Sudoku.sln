@@ -18,6 +18,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Backtracking", "Sudo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.GeneticAlgorithm", "Sudoku.GeneticAlgorithm\Sudoku.GeneticAlgorithm.csproj", "{58A84862-ECFE-4059-B5ED-B07A92B2D6D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.GrapheTheory", "Sudoku.GrapheTheory\Sudoku.GrapheTheory.csproj", "{50DF7D33-7C5E-4591-B8E1-D4F015DA1BF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Choco", "Sudoku.Choco\Sudoku.Choco.csproj", "{99E5A3FC-25DE-403A-8730-260E788ED43E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,14 @@ Global
 		{58A84862-ECFE-4059-B5ED-B07A92B2D6D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58A84862-ECFE-4059-B5ED-B07A92B2D6D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58A84862-ECFE-4059-B5ED-B07A92B2D6D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50DF7D33-7C5E-4591-B8E1-D4F015DA1BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50DF7D33-7C5E-4591-B8E1-D4F015DA1BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50DF7D33-7C5E-4591-B8E1-D4F015DA1BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50DF7D33-7C5E-4591-B8E1-D4F015DA1BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
