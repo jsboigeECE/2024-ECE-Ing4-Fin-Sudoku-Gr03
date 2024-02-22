@@ -1,100 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sudoku.Shared;
+using GeneticSharp;
 
 namespace Sudoku.GeneticAlgorithm
 {
-    public class SudokuFitness
+    /// <summary>
+    /// Evaluates a sudoku chromosome for completion by counting duplicates in rows, columns, boxes, and differences from the target mask
+    /// </summary>
+    public class SudokuFitness : IFitness
     {
-        //Déclaration d'une variable pour stocker le sudoku cible
-        private readonly int[,] _targetSudoku;
+        /// <summary>
+        /// The target Sudoku Mask to solve.
+        /// </summary>
+        private readonly SudokuGrid _targetSudokuGrid;
 
-        //Constructeur de la classe SudokuFitness prenant en argument le sudoku cible
-        public SudokuFitness(int[,] targetSudoku)
+        public SudokuFitness(SudokuGrid targetSudokuGrid)
         {
-            _targetSudoku = targetSudoku;
+            _targetSudokuGrid = targetSudokuGrid;
         }
 
-        //Méthode qui évalue la qualité du chromosome en fonction du nombre d'erreurs
-        public double Evaluate(SudokuChromosome chromosome)
+        /// <summary>
+        /// Evaluates a chromosome according to the IFitness interface. Simply reroutes to a typed version.
+        /// </summary>
+        /// <param name="chromosome"></param>
+        /// <returns></returns>
+        public double Evaluate(IChromosome chromosome)
         {
-            //Récuperation de la représentation du sudoku du chromosome
-            var sudokuGrid = chromosome.GetSudokuRepresentation();
-            //Décompte du nombre d'erreurs
-            int errorsCount = CountErrors(sudokuGrid);
-
-            // Renvoie l'opposé du nombre d'erreurs
-            return -errorsCount;
+            return Evaluate((ISudokuChromosome)chromosome);
         }
 
-        //Méthode qui compte le nombre d'erreurs au sein du sudoku
-        private int CountErrors(int[,] sudoku)
+        /// <summary>
+        /// Evaluates a ISudokuChromosome by summing over the fitnesses of its corresponding Sudoku boards.
+        /// </summary>
+        /// <param name="chromosome">a Chromosome that can build Sudokus</param>
+        /// <returns>the chromosome's fitness</returns>
+        public double Evaluate(ISudokuChromosome chromosome)
         {
-            int errors = 0;
+            List<double> scores = new List<double>();
 
-            // Vérifier les lignes puis les colinnes
-            for (int row = 0; row < SudokuChromosome.SudokuSize; row++)
+            var sudokus = chromosome.GetSudokus();
+            foreach (var sudoku in sudokus)
             {
-                for (int col = 0; col < SudokuChromosome.SudokuSize; col++)
-                {
-                    int value = sudoku[row, col];
-                    if (value != 0 && (CountInRow(sudoku, row, value) > 1 || CountInColumn(sudoku, col, value) > 1 || CountInBlock(sudoku, row, col, value) > 1))
-                    {
-                        errors++;
-                    }
-                }
+                scores.Add(Evaluate(sudoku));
             }
 
-            return errors;
+            return scores.Sum();
         }
 
-        //Méthode qui compte le nombre d'occurences d'un chiffre au sein d'une ligne
-        private int CountInRow(int[,] sudoku, int row, int value)
+        /// <summary>
+        /// Evaluates a single Sudoku board by counting the duplicates in rows, boxes
+        /// and the digits differing from the target mask.
+        /// </summary>
+        /// <param name="testSudokuBoard">the board to evaluate</param>
+        /// <returns>the number of mistakes the Sudoku contains.</returns>
+        public double Evaluate(SudokuGrid testSudokuGrid)
         {
-            int count = 0;
-            for (int col = 0; col < SudokuChromosome.SudokuSize; col++)
-            {
-                if (sudoku[row, col] == value)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-        //Méthode qui compte le nombre d'occurences d'un chiffre au sein d'une colonne
-        private int CountInColumn(int[,] sudoku, int col, int value)
-        {
-            int count = 0;
-            for (int row = 0; row < SudokuChromosome.SudokuSize; row++)
-            {
-                if (sudoku[row, col] == value)
-                {
-                    count++;
-                }
-            }
-            return count;
+            // We use a large lambda expression to count duplicates in rows, columns and boxes
+            var cells = testSudokuGrid.Cells.Select((c, i) => new { index = i, cell = c }).ToList();
+            var toTest = cells.GroupBy(x => x.index / 9).Select(g => g.Select(c => c.cell)) // rows
+              .Concat(cells.GroupBy(x => x.index % 9).Select(g => g.Select(c => c.cell))) //columns
+              .Concat(cells.GroupBy(x => x.index / 27 * 27 + x.index % 9 / 3 * 3).Select(g => g.Select(c => c.cell))); //boxes
+            var toReturn = -toTest.Sum(test => test.GroupBy(x => x).Select(g => g.Count() - 1).Sum()); // Summing over duplicates
+
+            toReturn -= cells.Count(x => _targetSudokuGrid.Cells[x.index] != null && _targetSudokuGrid.Cells[x.index] != x.cell); // Mask
+            return toReturn;
         }
 
-        //Méthode qui compte le nombre d'occurences d'un chiffre dans un bloc 
-        private int CountInBlock(int[,] sudoku, int row, int col, int value)
-        {
-            int count = 0;
-            int blockRow = row / 3 * 3;
-            int blockCol = col / 3 * 3;
-            for (int r = blockRow; r < blockRow + 3; r++)
-            {
-                for (int c = blockCol; c < blockCol + 3; c++)
-                {
-                    if (sudoku[r, c] == value)
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count;
-        }
+
 
     }
+
+
+
 }
