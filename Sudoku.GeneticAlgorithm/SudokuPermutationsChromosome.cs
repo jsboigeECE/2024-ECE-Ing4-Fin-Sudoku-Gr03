@@ -125,13 +125,25 @@ namespace Sudoku.GeneticAlgorithm
         protected virtual List<int> GetPermutation(int rowIndex, int permIDx)
         {
 
-            // we use a modulo operator in case the gene was swapped:
-            // It may contain a number higher than the number of available permutations. 
-            var perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
-            return perm;
+            if (TargetRowsPermutations[rowIndex].Count > 0)
+            {
+                var perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
+                return perm;
+            }
+            else
+            {
+                // Traite le cas où la liste de permutations est vide, en générant une permutation par défaut
+                return GenerateRandomPermutation(); 
+            }
         }
 
-
+        private List<int> GenerateRandomPermutation()
+        {
+            var rnd = new Random();
+            var numbers = Enumerable.Range(1, 9).ToList();
+            var randomizedNumbers = numbers.OrderBy(n => rnd.Next()).ToList();
+            return randomizedNumbers;
+        }
 
         /// <summary>
         /// Gets the permutation to apply from the index of the row concerned
