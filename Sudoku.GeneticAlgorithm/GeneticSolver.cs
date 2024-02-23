@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
-using Antlr.Runtime;
 using GeneticSharp;
-using GeneticSharp.Extensions;
 using Sudoku.Shared;
 
 
@@ -24,22 +22,40 @@ namespace Sudoku.GeneticAlgorithm
 
             var mutation = new UniformMutation();
 
-            var termination = new GenerationNumberTermination(1000);
+            ITermination termination = new OrTermination(new FitnessThresholdTermination(0),  new FitnessStagnationTermination(50));
 
-            // Créez une population pour le solveur génétique
-            var population = new Population(50, 50, new SudokuPermutationsChromosome(s));
+            var sudokuChromosome = new SudokuPermutationsChromosome(s);
 
-            // Créez un solveur génétique avec les opérateurs de sélection, crossover et mutation appropriés
-            var ga = new GeneticAlgorithm(population, fitness, selection, crossover, mutation, termination);
+            var currentPopulationSize = 100;
 
-            // Exécutez le solveur génétique
-            ga.Start();
+            var solved = false;
 
-            // Récupérez le meilleur chromosome après la résolution
-            var bestChromosome = ga.BestChromosome as ISudokuChromosome;
+            SudokuGrid bestSudokuBoard = null;
 
-            // Récupérez la meilleure grille Sudoku à partir du meilleur chromosome
-            var bestSudokuBoard = bestChromosome.GetSudokus().First();
+			while (!solved)
+            {
+
+				// Créez une population pour le solveur génétique
+				var population = new Population(currentPopulationSize, currentPopulationSize, sudokuChromosome);
+
+				// Créez un solveur génétique avec les opérateurs de sélection, crossover et mutation appropriés
+				var ga = new GeneticSharp.GeneticAlgorithm(population, fitness, selection, crossover, mutation);
+				ga.Termination = termination;
+
+				// Exécutez le solveur génétique
+				ga.Start();
+
+				// Récupérez le meilleur chromosome après la résolution
+				var bestChromosome = ga.BestChromosome as ISudokuChromosome;
+
+				// Récupérez la meilleure grille Sudoku à partir du meilleur chromosome
+				
+				bestSudokuBoard = bestChromosome.GetSudokus().First();
+
+				solved = bestSudokuBoard.NbErrors(s) == 0;
+				currentPopulationSize *= 2;
+            }
+
 
             // Retournez la grille Sudoku résolue
             return bestSudokuBoard;

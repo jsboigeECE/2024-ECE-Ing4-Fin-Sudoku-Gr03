@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GeneticSharp.Extensions;
 using GeneticSharp;
 using Sudoku.Shared;
 
@@ -17,7 +16,6 @@ namespace Sudoku.GeneticAlgorithm
     {
 
         // Ajoutez une propriété pour stocker la référence à la grille Sudoku cible
-        private SudokuGrid _targetSudokuGrid;        
 
         // Modifiez la méthode IsValidValueForCell pour utiliser la grille Sudoku cible
         private bool IsValidValueForCell(int rowIndex, int columnIndex, int value)
@@ -25,7 +23,7 @@ namespace Sudoku.GeneticAlgorithm
             // Vérifiez si la valeur est dans le domaine de la cellule dans la grille Sudoku
             return SudokuGrid.CellNeighbours[rowIndex][columnIndex].All(neighbour =>
                 SudokuGrid.NeighbourIndices.Select(index => SudokuGrid.CellNeighbours[neighbour.row][neighbour.column][index])
-                    .All(cell => _targetSudokuGrid.Cells[cell.row][cell.column] != value));
+                    .All(cell => TargetSudokuGrid.Cells[cell.row][cell.column] != value));
         }
 
         /// <summary>
