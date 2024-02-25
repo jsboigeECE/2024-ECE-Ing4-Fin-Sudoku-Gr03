@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,7 @@ namespace Sudoku.GeneticAlgorithm
         private bool IsValidValueForCell(int rowIndex, int columnIndex, int value)
         {
             // Vérifiez si la valeur est dans le domaine de la cellule dans la grille Sudoku
-            return SudokuGrid.CellNeighbours[rowIndex][columnIndex].All(neighbour =>
-                SudokuGrid.NeighbourIndices.Select(index => SudokuGrid.CellNeighbours[neighbour.row][neighbour.column][index])
-                    .All(cell => TargetSudokuGrid.Cells[cell.row][cell.column] != value));
+            return SudokuGrid.CellNeighbours[rowIndex][columnIndex].All(neighbour => TargetSudokuGrid.Cells[neighbour.row][neighbour.column] != value);
         }
 
         /// <summary>
@@ -125,9 +124,19 @@ namespace Sudoku.GeneticAlgorithm
         protected virtual List<int> GetPermutation(int rowIndex, int permIDx)
         {
 
-            // we use a modulo operator in case the gene was swapped:
-            // It may contain a number higher than the number of available permutations. 
-            var perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
+			// we use a modulo operator in case the gene was swapped:
+			// It may contain a number higher than the number of available permutations. 
+			List<int> perm = null;
+			try
+            {
+	            
+	            perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
+            }
+            catch (Exception e)
+            {
+	           Debugger.Break();
+            }
+            
             return perm;
         }
 
