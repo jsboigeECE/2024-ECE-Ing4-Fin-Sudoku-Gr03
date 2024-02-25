@@ -22,8 +22,8 @@ namespace Sudoku.GeneticAlgorithm
 
             var mutation = new UniformMutation();
 
+           
 
-            ITermination termination = new OrTermination(new FitnessThresholdTermination(0), new FitnessStagnationTermination(50));
             var sudokuChromosome = new SudokuPermutationsChromosome(s);
 
             var currentPopulationSize = 100;
@@ -40,6 +40,7 @@ namespace Sudoku.GeneticAlgorithm
 
 				// Créez un solveur génétique avec les opérateurs de sélection, crossover et mutation appropriés
 				var ga = new GeneticSharp.GeneticAlgorithm(population, fitness, selection, crossover, mutation);
+				ITermination termination = new OrTermination(new FitnessThresholdTermination(0), new FitnessStagnationTermination(50));
 				ga.Termination = termination;
 
 				// Exécutez le solveur génétique
