@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,7 @@ namespace Sudoku.GeneticAlgorithm
         private bool IsValidValueForCell(int rowIndex, int columnIndex, int value)
         {
             // Vérifiez si la valeur est dans le domaine de la cellule dans la grille Sudoku
-            return SudokuGrid.CellNeighbours[rowIndex][columnIndex].All(neighbour =>
-                SudokuGrid.NeighbourIndices.Select(index => SudokuGrid.CellNeighbours[neighbour.row][neighbour.column][index])
-                    .All(cell => TargetSudokuGrid.Cells[cell.row][cell.column] != value));
+            return SudokuGrid.CellNeighbours[rowIndex][columnIndex].All(neighbour => TargetSudokuGrid.Cells[neighbour.row][neighbour.column] != value);
         }
 
         /// <summary>
@@ -125,25 +124,23 @@ namespace Sudoku.GeneticAlgorithm
         protected virtual List<int> GetPermutation(int rowIndex, int permIDx)
         {
 
-            if (TargetRowsPermutations[rowIndex].Count > 0)
+			// we use a modulo operator in case the gene was swapped:
+			// It may contain a number higher than the number of available permutations. 
+			List<int> perm = null;
+			try
             {
-                var perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
-                return perm;
+	            
+	            perm = TargetRowsPermutations[rowIndex][permIDx % TargetRowsPermutations[rowIndex].Count].ToList();
             }
-            else
+            catch (Exception e)
             {
-                // Traite le cas où la liste de permutations est vide, en générant une permutation par défaut
-                return GenerateRandomPermutation(); 
+	           Debugger.Break();
             }
+            
+            return perm;
         }
 
-        private List<int> GenerateRandomPermutation()
-        {
-            var rnd = new Random();
-            var numbers = Enumerable.Range(1, 9).ToList();
-            var randomizedNumbers = numbers.OrderBy(n => rnd.Next()).ToList();
-            return randomizedNumbers;
-        }
+
 
         /// <summary>
         /// Gets the permutation to apply from the index of the row concerned
