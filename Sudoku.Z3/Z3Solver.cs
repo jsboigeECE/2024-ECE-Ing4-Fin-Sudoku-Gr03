@@ -41,7 +41,7 @@ public class Z3Solver: PythonSolverBase
 		protected override void InitializePythonComponents()
 		{
 			//declare your pip packages here
-			InstallPipModule("simanneal");
+			InstallPipModule("z3-solver");
 			base.InitializePythonComponents();
 		}
 
