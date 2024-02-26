@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Puzzles", "Puzzles", "{5351
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Backtracking", "Sudoku.Backtracking\Sudoku.Backtracking.csproj", "{1C50AE77-2CE9-4BD8-ADFE-3C3A255FFC78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.GeneticAlgorithm", "Sudoku.GeneticAlgorithm\Sudoku.GeneticAlgorithm.csproj", "{B77689E2-8080-4C38-B548-7441F184F1D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.ORToolsAlgorithm", "Sudoku.GeneticAlgorithm\Sudoku.ORToolsAlgorithm.csproj", "{B77689E2-8080-4C38-B548-7441F184F1D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

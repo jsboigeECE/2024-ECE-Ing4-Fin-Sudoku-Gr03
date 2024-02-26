@@ -13,7 +13,7 @@
     <PackageReference Include="Google.OrTools" Version="9.8.3296" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sudoku.GeneticAlgorithm\Sudoku.GeneticAlgorithm.csproj" />
+    <ProjectReference Include="..\Sudoku.GeneticAlgorithm\Sudoku.ORToolsAlgorithm.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
     <ProjectReference Include="..\Sudoku.Backtracking\Sudoku.Backtracking.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />

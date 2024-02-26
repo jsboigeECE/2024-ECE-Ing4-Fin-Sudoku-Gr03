@@ -1,26 +1,29 @@
 ﻿using Google.OrTools.Sat;
 using Sudoku.Shared;
 
-namespace GeneticAlgorithmSolver
+namespace GeneticAlgorithmORTools
+
 {
+    // Cette classe implémente l'interface ISudokuSolver en utilisant le solveur de programmation par contraintes OR-Tools.
     public class ORToolsSolver : ISudokuSolver
     {
+        // La méthode Solve tente de résoudre la grille Sudoku donnée en utilisant OR-Tools.
         public SudokuGrid Solve(SudokuGrid grid)
         {
+            // Créer un nouveau modèle de programmation par contraintes.
             CpModel model = new CpModel();
 
-            // Définir les variables du modèle
+            // Définir les variables du modèle. Chaque variable représente un chiffre dans une cellule (de 1 à 9).
             IntVar[,] cells = new IntVar[9, 9];
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    // Les variables représentent les chiffres dans chaque cellule (de 1 à 9)
                     cells[i, j] = model.NewIntVar(1, 9, $"Cell_{i}_{j}");
                 }
             }
 
-            // Ajouter les contraintes du Sudoku
+            // Ajouter les contraintes du Sudoku pour chaque ligne et chaque colonne.
             for (int i = 0; i < 9; i++)
             {
                 // Contrainte pour chaque ligne
