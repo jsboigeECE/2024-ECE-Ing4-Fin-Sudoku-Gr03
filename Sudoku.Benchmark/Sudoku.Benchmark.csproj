@@ -20,5 +20,6 @@
     <ProjectReference Include="..\Sudoku.GrapheTheory\Sudoku.GrapheTheory.csproj" />
     <ProjectReference Include="..\Sudoku.Z3\Sudoku.Z3.csproj" />
     <ProjectReference Include="..\Sudoku.ChocSolv\Sudoku.ChocSolv.csproj" />
+    <ProjectReference Include="..\Sudoku.LinqToZ3\Sudoku.LinqToZ3.csproj" />
   </ItemGroup>
 </Project>
