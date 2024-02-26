@@ -9,13 +9,17 @@ using System.Text;
 
 namespace Sudoku.Shared
 {
+    
     public class SudokuGrid : ICloneable
     {
 
-       
+
         /// <summary>
         /// The list of row indexes is used many times and thus stored for quicker access.
         /// </summary>
+
+             
+
         public static readonly ReadOnlyCollection<int> NeighbourIndices =
             new ReadOnlyCollection<int>(Enumerable.Range(0, 9).ToList());
 
@@ -376,5 +380,16 @@ namespace Sudoku.Shared
 
         public int NbEmptyCells() => Cells.SelectMany(r => r).Count(c => c == 0);
 
+        // Méthode pour obtenir un élément spécifique de la grille
+        public int GetElement(int row, int col)
+        {
+            return Cells[row][col];
+        }
+
+        // Méthode pour définir la valeur d'un élément spécifique de la grille
+        public void SetElement(int row, int col, int value)
+        {
+            Cells[row][col] = value;
+        }
     }
 }

@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GeneticSharp" Version="3.1.4" />
+    <PackageReference Include="Google.OrTools" Version="9.8.3296" />
     <PackageReference Include="Python.Deployment" Version="2.0.0" />
     <PackageReference Include="pythonnet" Version="3.1.0-preview2023-01-03" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
