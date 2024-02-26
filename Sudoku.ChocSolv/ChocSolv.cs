@@ -41,7 +41,7 @@ public class ChocSolv: PythonSolverBase
 		protected override void InitializePythonComponents()
 		{
 			//declare your pip packages here
-			InstallPipModule("pycsp3");
+			InstallPipModule("pychoco");
 			base.InitializePythonComponents();
 		}
 
