@@ -1,69 +1,122 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using GeneticSharp;
+﻿using GeneticSharp;
+using Sudoku.GeneticAlgorithm;
 using Sudoku.Shared;
-
 
 namespace Sudoku.GeneticAlgorithm
 {
     public class GeneticSolver : ISudokuSolver
     {
-        //Implémente la méthode Solve de ISudokuSolver
         public SudokuGrid Solve(SudokuGrid s)
         {
-            // Créez une instance de fitness pour évaluer les chromosomes Sudoku
-            var fitness = new SudokuFitness(s);
+            var permutatedCellsChromosome = new SudokuOrderedCellsChromosome(s);
 
-            var selection = new EliteSelection();
+            var popSize = 400;
+
+            var crossover = new CycleCrossover();
+            
+            var mutation = new TworsMutation();
+           
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
+
+            return sdkBoard;
+        }
+    }
+    /*
+    public class GeneticPermutedCellsCycleTworsSolver : ISudokuSolver
+    {
+        public SudokuGrid Solve(SudokuGrid s)
+        {
+            var permutatedCellsChromosome = new SudokuPermutatedCellsChromosome(s);
+
+            var popSize = 400;
+
+            var crossover = new CycleCrossover();
+            
+            var mutation = new TworsMutation();
+           
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
+
+            return sdkBoard;
+        }
+    }
+
+    public class GeneticPermutedCellsPartiallyMappedReverseSequenceSolver : ISudokuSolver
+    {
+        public SudokuGrid Solve(SudokuGrid s)
+        {
+            var permutatedCellsChromosome = new SudokuPermutatedCellsChromosome(s);
+
+            var popSize = 400;
+
+            var crossover = new PartiallyMappedCrossover();
+            
+            var mutation = new ReverseSequenceMutation();
+
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
+
+            return sdkBoard;
+        }
+    }
+
+    public class GeneticPermutedCellsOrderedInsertionSolver : ISudokuSolver
+    {
+        public SudokuGrid Solve(SudokuGrid s)
+        {
+            var permutatedCellsChromosome = new SudokuPermutatedCellsChromosome(s);
+
+            var popSize = 400;
+
+            var crossover = new OrderedCrossover();
+            
+            var mutation = new InsertionMutation();
+            
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
+
+            return sdkBoard;
+        }
+    }
+
+
+
+    public class GeneticPermutationsSolver : ISudokuSolver
+    {
+        public SudokuGrid Solve(SudokuGrid s)
+        {
+
+            var permutatedCellsChromosome = new SudokuPermutationsChromosome(s);
+
+
+            var popSize = 400;
 
             var crossover = new UniformCrossover();
 
             var mutation = new UniformMutation();
 
-           
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
 
-            var sudokuChromosome = new SudokuPermutationsChromosome(s);
-
-            var currentPopulationSize = 100;
-
-            var solved = false;
-
-            SudokuGrid bestSudokuBoard = null;
-
-			while (!solved)
-            {
-
-				// Créez une population pour le solveur génétique
-				var population = new Population(currentPopulationSize, currentPopulationSize, sudokuChromosome);
-
-				// Créez un solveur génétique avec les opérateurs de sélection, crossover et mutation appropriés
-				var ga = new GeneticSharp.GeneticAlgorithm(population, fitness, selection, crossover, mutation);
-				ITermination termination = new OrTermination(new FitnessThresholdTermination(0), new FitnessStagnationTermination(50));
-				ga.Termination = termination;
-
-				// Exécutez le solveur génétique
-				ga.Start();
-
-				// Récupérez le meilleur chromosome après la résolution
-				var bestChromosome = ga.BestChromosome as ISudokuChromosome;
-
-				// Récupérez la meilleure grille Sudoku à partir du meilleur chromosome
-				
-				bestSudokuBoard = bestChromosome.GetSudokus().First();
-
-				solved = bestSudokuBoard.NbErrors(s) == 0;
-				currentPopulationSize *= 2;
-            }
+            return sdkBoard;
+        }
+    }
 
 
-            // Retournez la grille Sudoku résolue
-            return bestSudokuBoard;
+    public class GeneticCellsSolver : ISudokuSolver
+    {
+        public SudokuGrid Solve(SudokuGrid s)
+        {
+
+            var permutatedCellsChromosome = new SudokuPermutationsChromosome(s);
+
+            var popSize = 400;
+            var crossover = new UniformCrossover();
+            
+            var mutation = new UniformMutation();
+            
+            var sdkBoard = SudokuTestHelper.Eval(permutatedCellsChromosome, crossover, mutation, s, popSize);
+
+            return sdkBoard;
 
         }
     }
+    */
+
 }
-
-
-
