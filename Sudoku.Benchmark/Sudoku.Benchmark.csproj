@@ -17,5 +17,6 @@
     <ProjectReference Include="..\Sudoku.Choco\Sudoku.Choco.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
     <ProjectReference Include="..\Sudoku.GrapheTheory\Sudoku.GrapheTheory.csproj" />
+    <ProjectReference Include="..\Sudoku.ChocSolv\Sudoku.ChocSolv.csproj" />
   </ItemGroup>
 </Project>

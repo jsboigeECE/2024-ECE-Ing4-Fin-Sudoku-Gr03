@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.GrapheTheory", "Sudo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Choco", "Sudoku.Choco\Sudoku.Choco.csproj", "{99E5A3FC-25DE-403A-8730-260E788ED43E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.ChocSolv", "Sudoku.ChocSolv\Sudoku.ChocSolv.csproj", "{26654345-14F1-4CFA-8884-531E7C08AAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26654345-14F1-4CFA-8884-531E7C08AAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26654345-14F1-4CFA-8884-531E7C08AAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26654345-14F1-4CFA-8884-531E7C08AAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26654345-14F1-4CFA-8884-531E7C08AAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
