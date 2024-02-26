@@ -1,59 +1,107 @@
 from timeit import default_timer
 
-#instance = ((0,0,0,0,9,4,0,3,0),
-#           (0,0,0,5,1,0,0,0,7),
-#           (0,8,9,0,0,0,0,4,0),
-#           (0,0,0,0,0,0,2,0,8),
-#           (0,6,0,2,0,1,0,5,0),
-#           (1,0,2,0,0,0,0,0,0),
-#           (0,7,0,0,0,0,5,2,0),
-#           (9,0,0,0,6,5,0,0,0),
-#           (0,4,0,9,7,0,0,0,0))
+def cross(A, B):
+    return [a+b for a in A for b in B]
 
-def findNextCellToFill(grid, i, j):
-        for x in range(i,9):
-                for y in range(j,9):
-                        if grid[x][y] == 0:
-                                return x,y
-        for x in range(0,9):
-                for y in range(0,9):
-                        if grid[x][y] == 0:
-                                return x,y
-        return -1,-1
+digits = '123456789'
+rows = 'ABCDEFGHI'
+cols = digits
+squares = cross(rows, cols)
+unitlist = ([cross(rows, c) for c in cols] + [cross(r, cols) for r in rows] +
+            [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')])
+units = dict((s, [u for u in unitlist if s in u]) for s in squares)
+peers = dict((s, set(sum(units[s], []))-set([s])) for s in squares)
 
-def isValid(grid, i, j, e):
-        rowOk = all([e != grid[i][x] for x in range(9)])
-        if rowOk:
-                columnOk = all([e != grid[x][j] for x in range(9)])
-                if columnOk:
-                        # finding the top left x,y co-ordinates of the section containing the i,j cell
-                        secTopX, secTopY = 3 *(i//3), 3 *(j//3) #floored quotient should be used here. 
-                        for x in range(secTopX, secTopX+3):
-                                for y in range(secTopY, secTopY+3):
-                                        if grid[x][y] == e:
-                                                return False
-                        return True
+def parse_grid(grid):
+    """Convert grid to a dict of possible values, {square: digits}, or
+    return False if a contradiction is detected."""
+    values = dict((s, digits) for s in squares)
+    for s,d in grid_values(grid).items():
+        if d in digits and not assign(values, s, d):
+            return False
+    return values
+
+def grid_values(grid):
+    "Convert grid into a dict of {square: char} with '0' or '.' for empties."
+    chars = [c if c in digits else '0' for c in grid]
+    assert len(chars) == 81
+    return dict(zip(squares, chars))
+
+def assign(values, s, d):
+    other_values = values[s].replace(d, '')
+    if all(eliminate(values, s, d2) for d2 in other_values):
+        return values
+    else:
         return False
 
-def solveSudoku(grid, i=0, j=0):
-        i,j = findNextCellToFill(grid, i, j)
-        if i == -1:
-                return True
-        for e in range(1,10):
-                if isValid(grid,i,j,e):
-                        grid[i][j] = e
-                        if solveSudoku(grid, i, j):
-                                return True
-                        # Undo the current cell for backtracking
-                        grid[i][j] = 0
+def eliminate(values, s, d):
+    if d not in values[s]:
+        return values
+    values[s] = values[s].replace(d, '')
+    if len(values[s]) == 0:
         return False
+    elif len(values[s]) == 1:
+        d2 = values[s]
+        if not all(eliminate(values, s2, d2) for s2 in peers[s]):
+            return False
+    for u in units[s]:
+        dplaces = [s for s in u if d in values[s]]
+        if len(dplaces) == 1:
+            if not assign(values, dplaces[0], d):
+                return False
+    return values
 
-#start = default_timer()
-if(solveSudoku(instance)):
-	#print_grid(instance)
-	r=instance
+def display(values):
+    width = 1+max(len(values[s]) for s in squares)
+    line = '+'.join(['-'*(width*3)]*3)
+    for r in rows:
+        print(''.join(values[r+c].center(width)+('|' if c in '36' else '')
+                      for c in cols))
+        if r in 'CF': print(line)
+    print()
+
+def solve(grid):
+    return search(parse_grid(grid))
+
+def search(values):
+    if values is False:
+        return False
+    if all(len(values[s]) == 1 for s in squares):
+        return values
+    n, s = min((len(values[s]), s) for s in squares if len(values[s]) > 1)
+    return some(search(assign(values.copy(), s, d)) for d in values[s])
+
+def some(seq):
+    for e in seq:
+        if e:
+            return e
+    return False
+
+def sudoku_solver(csharp_grid):
+    grid = ''.join(str(c) for row in csharp_grid for c in row)
+    result = solve(grid)
+    if result:
+        return  [[int(result[s]) for s in cross(r, cols)] for r in rows]       
+    else:
+        return None
+
+# Exemple d'utilisation
+example_grid = '....7..2.8.......6.1.2.5...9.54....8.........3....85.1...3.2.8.4.......9.7..6....'
+
+solved_grid = sudoku_solver(example_grid)
+
+# Afficher la grille résolue ou effectuer d'autres opérations avec solved_grid
+if solved_grid:
+    print("Grille résolue :")
+    for row in solved_grid:
+        print(row)
+        
 else:
-	print ("Aucune solution trouv�e")
+    print("Aucune solution trouvée")
+
+
+
+
 
 #execution = default_timer() - start
 #print("Le temps de r�solution est de : ", execution, " seconds as a floating point value")

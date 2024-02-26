@@ -27,7 +27,7 @@ public class NorvigPythonSolver : PythonSolverBase
             scope.Exec(code);
 
             //Retrieve solved Sudoku variable
-            var result = scope.Get("r");
+            var result = scope.Get("result");
 
             //Convert back to C# object
             var managedResult = result.As<int[][]>();
