@@ -15,6 +15,7 @@
     <ProjectReference Include="..\Sudoku.GeneticAlgorithm\Sudoku.GeneticAlgorithm.csproj" />
     <ProjectReference Include="..\Sudoku.Backtracking\Sudoku.Backtracking.csproj" />
     <ProjectReference Include="..\Sudoku.Choco\Sudoku.Choco.csproj" />
+    <ProjectReference Include="..\Sudoku.OrTools\Sudoku.ORToolsAlgorithm.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
     <ProjectReference Include="..\Sudoku.GrapheTheory\Sudoku.GrapheTheory.csproj" />
     <ProjectReference Include="..\Sudoku.Z3\Sudoku.Z3.csproj" />
