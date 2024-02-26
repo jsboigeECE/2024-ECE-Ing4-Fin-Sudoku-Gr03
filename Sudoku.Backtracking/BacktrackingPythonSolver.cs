@@ -42,13 +42,14 @@ namespace Sudoku.Backtracking
 			//}
 
 		}
+		/*
 
 		protected override void InitializePythonComponents()
 		{
 			//declare your pip packages here
-			//InstallPipModule("numpy");
+			InstallPipModule("numpy");
 			base.InitializePythonComponents();
-		}
+		}*/
 
 	}
 }

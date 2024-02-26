@@ -50,7 +50,7 @@ def solveSudoku(grid, i=0, j=0):
 
 #start = default_timer()
 if(solveSudoku(instance)):
-	#print_grid(instance)
+	#print("eeeee")
 	r=instance
 else:
 	print ("Aucune solution trouv�e")

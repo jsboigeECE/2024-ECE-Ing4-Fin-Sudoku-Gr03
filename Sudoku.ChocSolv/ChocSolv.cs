@@ -1,4 +1,5 @@
 ﻿using Python.Runtime;
+using Sudoku.Shared;
 
 namespace Sudoku.ChocSolv;
 
@@ -40,7 +41,7 @@ public class ChocSolv: PythonSolverBase
 		protected override void InitializePythonComponents()
 		{
 			//declare your pip packages here
-			//InstallPipModule("numpy");
+			InstallPipModule("pychoco");
 			base.InitializePythonComponents();
 		}
 
