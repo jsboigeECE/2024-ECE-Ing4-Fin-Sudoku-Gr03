@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MiaPlaza.ExpressionUtils" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Z3" Version="4.12.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
+    <ProjectReference Include="..\Z3.LinqBinding\Z3.LinqBinding.csproj"/>
   </ItemGroup>
 
 </Project>
