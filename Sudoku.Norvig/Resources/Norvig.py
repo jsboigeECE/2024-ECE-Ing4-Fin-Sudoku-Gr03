@@ -82,14 +82,19 @@ def some(seq):
             return e
     return False
 
-# Fonction principale pour résoudre la grille de Sudoku
+# Fonction principale pour résoudre la grille de Sudoku   
 def sudoku_solver(csharp_grid):
+    start_time = default_timer()
     grid = ''.join(str(c) for row in csharp_grid for c in row)# Convertit la grille en une chaîne de caractères
     result = solve(grid)# Résout la grille
+    end_time = default_timer()
+    elapsed_time = end_time - start_time
+    print(f"Temps d'execution : {elapsed_time} secondes")
     if result:
-        return  [[int(result[s]) for s in cross(r, cols)] for r in rows]       
+        return  [[int(result[s]) for s in cross(r, cols)] for r in rows]
     else:
         return None # Retourne None si aucune solution n'est trouvée
+
 
 # Exemple d'utilisation
 example_grid = '....7..2.8.......6.1.2.5...9.54....8.........3....85.1...3.2.8.4.......9.7..6....'
