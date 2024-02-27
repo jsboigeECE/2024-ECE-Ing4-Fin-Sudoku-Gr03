@@ -27,6 +27,7 @@ def grid_values(grid):
     assert len(chars) == 81
     return dict(zip(squares, chars))
 
+#Propagation de contrainte
 def assign(values, s, d):
     other_values = values[s].replace(d, '')
     if all(eliminate(values, s, d2) for d2 in other_values):
@@ -60,6 +61,7 @@ def display(values):
         if r in 'CF': print(line)
     print()
 
+#Recherche
 def solve(grid):
     return search(parse_grid(grid))
 
