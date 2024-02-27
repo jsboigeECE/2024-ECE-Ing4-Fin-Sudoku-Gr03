@@ -91,7 +91,8 @@ def sudoku_solver(csharp_grid):
     elapsed_time = end_time - start_time
     print(f"Temps d'execution : {elapsed_time} secondes")
     if result:
-        return  [[int(result[s]) for s in cross(r, cols)] for r in rows]
+        solved_grid = [[int(result[s]) for s in cross(r, cols)] for r in rows]
+        return solved_grid
     else:
         return None # Retourne None si aucune solution n'est trouvée
 
