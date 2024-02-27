@@ -17,8 +17,6 @@ peers = dict((s, set(sum(units[s], []))-set([s])) for s in squares)
 
 # Fonction pour analyser la grille et l'initialiser avec les valeurs possibles
 def parse_grid(grid):
-    """Convert grid to a dict of possible values, {square: digits}, or
-    return False if a contradiction is detected."""
     values = dict((s, digits) for s in squares)# Initialise toutes les cases avec tous les chiffres possibles
     for s,d in grid_values(grid).items():# Attribue les valeurs déjà données dans la grille
         if d in digits and not assign(values, s, d):
@@ -28,7 +26,6 @@ def parse_grid(grid):
 
 # Fonction pour convertir la grille en un dictionnaire de valeurs
 def grid_values(grid):
-    "Convert grid into a dict of {square: char} with '0' or '.' for empties."
     chars = [c if c in digits else '0' for c in grid] # Remplace les cases vides par '0'
     assert len(chars) == 81# Vérifie que la grille a la bonne taille
     return dict(zip(squares, chars))# Crée un dictionnaire avec les cases et les caractères correspondants
@@ -111,6 +108,3 @@ else:
 
 
 
-
-#execution = default_timer() - start
-#print("Le temps de r�solution est de : ", execution, " seconds as a floating point value")
