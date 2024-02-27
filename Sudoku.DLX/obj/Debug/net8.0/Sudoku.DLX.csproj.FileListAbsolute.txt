@@ -1,0 +1,16 @@
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\bin\Debug\net8.0\Sudoku.DLX.deps.json
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\bin\Debug\net8.0\Sudoku.DLX.dll
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\bin\Debug\net8.0\Sudoku.DLX.pdb
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\bin\Debug\net8.0\Sudoku.Shared.dll
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\bin\Debug\net8.0\Sudoku.Shared.pdb
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.csproj.AssemblyReference.cache
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.GeneratedMSBuildEditorConfig.editorconfig
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.AssemblyInfoInputs.cache
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.AssemblyInfo.cs
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.csproj.CoreCompileInputs.cache
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.sourcelink.json
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.csproj.Up2Date
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.dll
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\refint\Sudoku.DLX.dll
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\Sudoku.DLX.pdb
+D:\ece\ING 4 IA\projet sudoku ing4\Sudoku.DLX\obj\Debug\net8.0\ref\Sudoku.DLX.dll
