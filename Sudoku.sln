@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Z3", "Sudoku.Z3\Sudo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.ORToolsAlgorithm", "Sudoku.OrTools\Sudoku.ORToolsAlgorithm.csproj", "{0CD56A17-2556-4642-B3FC-AA263BCF60FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Norvig", "Sudoku.Norvig\Sudoku.Norvig.csproj", "{818A9EE0-1D40-4EBA-8A79-E231F868A685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99E5A3FC-25DE-403A-8730-260E788ED43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{818A9EE0-1D40-4EBA-8A79-E231F868A685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{818A9EE0-1D40-4EBA-8A79-E231F868A685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{818A9EE0-1D40-4EBA-8A79-E231F868A685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{818A9EE0-1D40-4EBA-8A79-E231F868A685}.Release|Any CPU.Build.0 = Release|Any CPU
 		{042DB1EA-03A9-43AC-8C81-FFF59D44962E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{042DB1EA-03A9-43AC-8C81-FFF59D44962E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{042DB1EA-03A9-43AC-8C81-FFF59D44962E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,5 +93,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BEE8F8D1-8D10-45DA-ABF1-5DE630CBE60B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5351C3A6-44B9-45CB-B4DB-4578796500FB} = {5351C3A6-44B9-45CB-B4DB-4578796500FB}
 	EndGlobalSection
 EndGlobal
